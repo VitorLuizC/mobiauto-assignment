@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
+import Select from "./Select";
 
 const baseURL = "https://parallelum.com.br/fipe/api/v1/carros";
+
+function toOption({ nome, codigo }) {
+  return {
+    text: nome,
+    value: codigo
+  };
+}
 
 function Home() {
   const [brand, setBrand] = useState(undefined);
@@ -64,30 +72,30 @@ function Home() {
 
   return (
     <main>
-      Marca
-      <select value={brand} onChange={event => setBrand(event.target.value)}>
-        {brands.map(({ nome: name, codigo: id }) => (
-          <option key={id} value={id}>
-            {name}
-          </option>
-        ))}
-      </select>
-      Modelo
-      <select value={model} onChange={event => setModel(event.target.value)}>
-        {models.map(({ nome: name, codigo: id }) => (
-          <option key={id} value={id}>
-            {name}
-          </option>
-        ))}
-      </select>
-      Anos
-      <select value={year} onChange={event => setYear(event.target.value)}>
-        {years.map(({ nome: name, codigo: id }) => (
-          <option key={id} value={id}>
-            {name}
-          </option>
-        ))}
-      </select>
+      <Select
+        value={brand}
+        options={brands.map(toOption)}
+        onChange={setBrand}
+        label="Marcas"
+        placeholder="Selecione a marca"
+      />
+
+      <Select
+        value={model}
+        options={models.map(toOption)}
+        onChange={setModel}
+        label="Modelo"
+        placeholder="Selecione o modelo"
+      />
+
+      <Select
+        value={year}
+        options={years.map(toOption)}
+        onChange={setYear}
+        label="Ano"
+        placeholder="Selecione o ano"
+      />
+
       <pre>{JSON.stringify(value, null, 2)}</pre>
     </main>
   );
