@@ -3,6 +3,11 @@ import Select from "./Select";
 
 const baseURL = "https://parallelum.com.br/fipe/api/v1/carros";
 
+async function fetchJSON(url) {
+  const response = await fetch(baseURL + url);
+  return response.json();
+}
+
 function toOption({ nome, codigo }) {
   return {
     text: nome,
@@ -16,8 +21,7 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(baseURL + "/marcas");
-      const brands = await response.json();
+      const brands = await fetchJSON("/marcas");
       setBrands(brands);
     })();
   }, []);
@@ -31,9 +35,8 @@ function Home() {
     }
 
     (async () => {
-      const response = await fetch(baseURL + "/marcas/" + brand + "/modelos");
-      const models = await response.json();
-      setModels(models.modelos);
+      const { modelos: models } = await fetchJSON(`/marcas/${brand}/modelos`);
+      setModels(models);
     })();
   }, [brand]);
 
@@ -46,10 +49,7 @@ function Home() {
     }
 
     (async () => {
-      const response = await fetch(
-        baseURL + "/marcas/" + brand + "/modelos/" + model + "/anos"
-      );
-      const years = await response.json();
+      const years = await fetchJSON(`/marcas/${brand}/modelos/${model}/anos`);
       setYears(years);
     })();
   }, [model]);
@@ -62,10 +62,9 @@ function Home() {
     }
 
     (async () => {
-      const response = await fetch(
-        baseURL + "/marcas/" + brand + "/modelos/" + model + "/anos/" + year
+      const value = await fetchJSON(
+        `/marcas/${brand}/modelos/${model}/anos/${year}`
       );
-      const value = await response.json();
       setValue(value);
     })();
   }, [year]);
