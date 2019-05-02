@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "mobx": "4.8.0",
+    "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,6 +24,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "mobx-remotedev": "^0.3.6"
+    "mobx-remotedev": "^0.3.6",
+    "react-scripts": "^3.0.0"
   }
 }
