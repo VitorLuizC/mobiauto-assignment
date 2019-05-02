@@ -1,13 +1,6 @@
 import React from "react";
-import Select from "./Select";
-import Loading from "./Loading";
-
-function toOption({ nome, codigo }) {
-  return {
-    text: nome,
-    value: codigo
-  };
-}
+import FipeFilter from "./Fipe/FipeFilter";
+import FipeValue from "./Fipe/FipeValue";
 
 function Home({
   brand,
@@ -27,53 +20,41 @@ function Home({
 }) {
   return (
     <main className="">
-      {isLoadingBrands ? (
-        <Loading message="Carregando as marcas..." />
-      ) : (
-        <Select
-          value={brand}
-          options={brands.map(toOption)}
-          onChange={setBrand}
-          label="Marcas"
-          placeholder="Selecione a marca"
-        />
-      )}
-
-      {!brand ? (
-        undefined
-      ) : isLoadingModels ? (
-        <Loading message="Carregando os modelos..." />
-      ) : (
-        <Select
-          value={model}
-          options={models.map(toOption)}
-          onChange={setModel}
-          label="Modelo"
-          placeholder="Selecione o modelo"
-        />
-      )}
-
-      {!model ? (
-        undefined
-      ) : isLoadingYears ? (
-        <Loading message="Carregando os anos..." />
-      ) : (
-        <Select
-          value={year}
-          options={years.map(toOption)}
-          onChange={setYear}
-          label="Ano"
-          placeholder="Selecione o ano"
-        />
-      )}
-
-      {!year ? (
-        undefined
-      ) : isLoadingValue ? (
-        <Loading message="Carregando o valor..." />
-      ) : (
-        <strong>{value.Valor}</strong>
-      )}
+      <FipeFilter
+        value={brand}
+        options={brands}
+        onChange={setBrand}
+        label="Marcas"
+        placeholder="Selecione a marca"
+        loadingMessage="Carregando as marcas..."
+        isLoading={isLoadingBrands}
+      />
+      <FipeFilter
+        isLoading={isLoadingModels}
+        isVisible={!!brand}
+        value={model}
+        options={models}
+        onChange={setModel}
+        label="Modelo"
+        placeholder="Selecione o modelo"
+        loadingMessage="Carregando as modelos..."
+      />
+      <FipeFilter
+        isLoading={isLoadingYears}
+        isVisible={!!model}
+        value={year}
+        options={years}
+        onChange={setYear}
+        label="Ano"
+        placeholder="Selecione o ano"
+        loadingMessage="Carregando os anos..."
+      />
+      <FipeValue
+        isLoading={isLoadingValue}
+        isVisible={!!year}
+        value={value && value.Valor}
+        loadingMessage=""
+      />
     </main>
   );
 }
