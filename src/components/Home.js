@@ -1,5 +1,6 @@
 import React from "react";
 import Select from "./Select";
+import Loading from "./Loading";
 
 function toOption({ nome, codigo }) {
   return {
@@ -25,9 +26,9 @@ function Home({
   isLoadingValue
 }) {
   return (
-    <main>
+    <main className="">
       {isLoadingBrands ? (
-        "Carregando as marcas..."
+        <Loading message="Carregando as marcas..." />
       ) : (
         <Select
           value={brand}
@@ -41,7 +42,7 @@ function Home({
       {!brand ? (
         undefined
       ) : isLoadingModels ? (
-        "Carregando os modelos..."
+        <Loading message="Carregando os modelos..." />
       ) : (
         <Select
           value={model}
@@ -55,7 +56,7 @@ function Home({
       {!model ? (
         undefined
       ) : isLoadingYears ? (
-        "Carregando os anos..."
+        <Loading message="Carregando os anos..." />
       ) : (
         <Select
           value={year}
@@ -69,9 +70,9 @@ function Home({
       {!year ? (
         undefined
       ) : isLoadingValue ? (
-        "Carregando o valor..."
+        <Loading message="Carregando o valor..." />
       ) : (
-        <pre>{JSON.stringify(value, null, 2)}</pre>
+        <strong>{value.Valor}</strong>
       )}
     </main>
   );
