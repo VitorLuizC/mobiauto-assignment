@@ -50,6 +50,7 @@ function Select({ label, options, value, onChange, placeholder }) {
               value={term}
               onChange={event => setTerm(event.target.value)}
               className="input"
+              placeholder="Pesquisar entre as opções"
             />
           </div>
 

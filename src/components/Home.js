@@ -1,6 +1,7 @@
+import "./Home.css";
 import React from "react";
-import FipeFilter from "./Fipe/FipeFilter";
 import FipeValue from "./Fipe/FipeValue";
+import FipeFilter from "./Fipe/FipeFilter";
 
 function Home({
   brand,
@@ -19,7 +20,7 @@ function Home({
   isLoadingValue
 }) {
   return (
-    <main className="">
+    <main className="Home">
       <FipeFilter
         value={brand}
         options={brands}
